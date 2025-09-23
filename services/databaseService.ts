@@ -1,5 +1,5 @@
 // Base URL (from .env or default localhost)
-const API = import.meta.env.VITE_API_BASE || "http://localhost:8080";
+const API = import.meta.env.VITE_API_BASE;
 
 export interface Booking {
   id: number;
@@ -19,11 +19,11 @@ export interface Password {
   password: string;
 }
 
-// What we SEND when creating a new password
 export interface PasswordCreate {
   password: string;       // 🔑 no id required when creating
 }
 
+// ==================== BOOKINGS ====================
 export const getAllBookings = async (): Promise<Booking[]> => {
   const res = await fetch(`${API}/bookings`);
   if (!res.ok) return [];
@@ -42,18 +42,19 @@ export const getBookingByNumber = async (
   const res = await fetch(`${API}/bookings/number/${bookingNumber}`);
   if (!res.ok) return null;
   const body = await res.json();
-  return body.data as Booking; // unwrap the ApiResponse
+  return body.data as Booking;   // <- important
 };
 
 export const createBooking = async (
   booking: Omit<Booking, "id" | "bookingNumber" | "status">
 ): Promise<Booking | null> => {
-  const res = await fetch(`${API}/api/bookings`, {   // ✅ matches backend now
+  const res = await fetch(`${API}/bookings`, {   // ✅ matches backend now
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(booking),
   });
-  return res.ok ? res.json() : null;
+  const body = await res.json();
+  return body.data ?? null;
 };
 
 export const updateBookingStatus = async (
@@ -73,8 +74,8 @@ export const deleteBooking = async (id: number): Promise<boolean> => {
   return res.ok;
 };
 
-// ==================== ADMIN PASSWORDS ====================
 
+// ==================== ADMIN PASSWORDS ====================
 export const login = async (password: string): Promise<boolean> => {
   const res = await fetch(`${API}/api/auth/login`, {
     method: "POST",
@@ -87,23 +88,25 @@ export const login = async (password: string): Promise<boolean> => {
 };
 
 export const getPasswords = async (): Promise<Password[]> => {
-  const res = await fetch(`${API}/auth/passwords`);
-  return res.ok ? res.json() : [];
+  const res = await fetch(`${API}/api/auth/getallpasswords`);
+  const body = await res.json();
+  return res.ok ? body.data as Password[] : [];
 };
 
 export const addPassword = async (
   password: PasswordCreate
 ): Promise<Password | null> => {
-  const res = await fetch(`${API}/auth/passwords`, {
+  const res = await fetch(`${API}/api/auth/passwords`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(password),
   });
-  return res.ok ? res.json() : null;
+  const body = await res.json();
+  return res.ok ? body.data as Password : null;
 };
 
 export const deletePassword = async (id: number): Promise<boolean> => {
-  const res = await fetch(`${API}/auth/passwords/${id}`, {
+  const res = await fetch(`${API}/api/auth/passwords/${id}`, {
     method: "DELETE",
   });
   return res.ok;

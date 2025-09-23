@@ -1,49 +1,64 @@
-import type React from 'react';
+// ✅ Service type constants + type
+export const ServiceType = {
+  Standard: "standard",
+  Deep: "deep",
+  MoveInOut: "move-in-out",
+} as const;
 
-export type BookingStatus = 'Pending' | 'Approved' | 'Rejected';
+export type ServiceType = typeof ServiceType[keyof typeof ServiceType];
 
-export interface Booking {
-    id: number;
-    bookingNumber: string;
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    service: string;
-    date: string;
-    time: string;
-    status: BookingStatus;
+// ✅ Booking details
+export interface BookingDetails {
+  name: string;
+  address: string;
+  phone: string;
+  serviceType: ServiceType;
+  date: string;
+  time: string;
+  notes?: string;
 }
 
-export type BookingDetails = Omit<Booking, 'id' | 'bookingNumber' | 'status'>;
-
+// Full object returned by backend
 export interface Password {
-    id: number;
-    password: string;
+  id: number;
+  password: string;
 }
 
-export interface ServiceType {
-    id: string;
-    title: string;
-    description: string;
-    icon: React.FC<React.SVGProps<SVGSVGElement>>;
-    price: string;
+// Only the data you send to create a password
+export interface PasswordCreate {
+  password: string;
 }
 
-export interface Cleaner {
+
+// ✅ Notification details
+export interface NotificationDetails {
+  subject: string;
+  summary: string;
+  details: {
     name: string;
-    role: string;
-    bio: string;
-    imageUrl: string;
-    contact: string;
+    address: string;
+    phone: string;
+    service: string;
+    dateTime: string;
+    notes: string;
+  };
+  suggestedAction: string;
 }
 
-export interface AuthContextType {
-    isAdmin: boolean;
-    adminName: string | null;
-    passwords: Password[];
-    login: (password: string) => Promise<boolean>;
-    logout: () => void;
-    addPassword: (password: string) => Promise<boolean>;
-    deletePassword: (id: number) => Promise<boolean>;
+// ✅ Generated SMS notifications
+export interface GeneratedNotifications {
+  bookingId: string;     // unique booking ID (e.g., APT-001)
+  customerPhone: string; // customer's phone number (+1234567890 format)
+  repPhone: string;      // representative's phone number
+  message: string;       // full SMS body content
+  date: string;          // appointment date
+  time: string;          // appointment time
+  service: string;       // service type
+}
+
+// ✅ Add SmsStatus if needed
+export enum SmsStatus {
+  PENDING = "pending",
+  SENT = "sent",
+  FAILED = "failed",
 }
