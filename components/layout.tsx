@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './auth';
@@ -99,13 +100,19 @@ const Footer = () => {
                      {/* Placeholder for social icons */}
                 </div>
                 <p className="text-center text-base text-slate-400">&copy; {new Date().getFullYear()} SparkleClean. All Rights Reserved.</p>
-                {!isAdmin && (
-                    <div className="mt-4 text-center">
-                        <Link to="/admin/login" className="text-sm text-slate-500 hover:underline hover:text-white transition-colors">
-                            Admin Login
-                        </Link>
-                    </div>
-                )}
+                <div className="mt-4 text-center text-sm text-slate-500 flex justify-center items-center space-x-4">
+                    <Link to="/qrcode" className="hover:underline hover:text-white transition-colors">
+                        Share via QR
+                    </Link>
+                    {!isAdmin && (
+                        <>
+                            <span className="text-slate-600">|</span>
+                            <Link to="/admin/login" className="hover:underline hover:text-white transition-colors">
+                                Admin Login
+                            </Link>
+                        </>
+                    )}
+                </div>
             </div>
         </footer>
     );

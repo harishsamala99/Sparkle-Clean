@@ -15,6 +15,7 @@ import StatusPage from './pages/StatusPage';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminBookingsPage from './pages/admin/AdminBookingsPage';
 import AdminSettingsPage from './pages/admin/AdminSettingsPage';
+import QRCodePage from './pages/QRCodePage';
 
 export default function App() {
     return (
@@ -28,6 +29,7 @@ export default function App() {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/booking" element={<BookingPage />} />
                     <Route path="/status" element={<StatusPage />} />
+                    <Route path="/qrcode" element={<QRCodePage />} />
                     <Route path="/admin/login" element={<AdminLoginPage />} />
 
                     <Route element={<ProtectedRoute />}>

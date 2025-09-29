@@ -1,64 +1,49 @@
-// ✅ Service type constants + type
-export const ServiceType = {
-  Standard: "standard",
-  Deep: "deep",
-  MoveInOut: "move-in-out",
-} as const;
+import type React from 'react';
 
-export type ServiceType = typeof ServiceType[keyof typeof ServiceType];
+export type BookingStatus = 'Pending' | 'Approved' | 'Rejected';
 
-// ✅ Booking details
-export interface BookingDetails {
-  name: string;
-  address: string;
-  phone: string;
-  serviceType: ServiceType;
-  date: string;
-  time: string;
-  notes?: string;
-}
-
-// Full object returned by backend
-export interface Password {
-  id: number;
-  password: string;
-}
-
-// Only the data you send to create a password
-export interface PasswordCreate {
-  password: string;
-}
-
-
-// ✅ Notification details
-export interface NotificationDetails {
-  subject: string;
-  summary: string;
-  details: {
+export interface Booking {
+    id: number;
+    bookingNumber: string;
     name: string;
-    address: string;
+    email: string;
     phone: string;
+    address: string;
     service: string;
-    dateTime: string;
-    notes: string;
-  };
-  suggestedAction: string;
+    date: string;
+    time: string;
+    status: BookingStatus;
 }
 
-// ✅ Generated SMS notifications
-export interface GeneratedNotifications {
-  bookingId: string;     // unique booking ID (e.g., APT-001)
-  customerPhone: string; // customer's phone number (+1234567890 format)
-  repPhone: string;      // representative's phone number
-  message: string;       // full SMS body content
-  date: string;          // appointment date
-  time: string;          // appointment time
-  service: string;       // service type
+export type BookingDetails = Omit<Booking, 'id' | 'bookingNumber' | 'status'>;
+
+export interface Password {
+    id: number;
+    password: string;
 }
 
-// ✅ Add SmsStatus if needed
-export enum SmsStatus {
-  PENDING = "pending",
-  SENT = "sent",
-  FAILED = "failed",
+export interface ServiceType {
+    id: string;
+    title: string;
+    description: string;
+    icon: React.FC<React.SVGProps<SVGSVGElement>>;
+    price: string;
+}
+
+export interface Cleaner {
+    name: string;
+    role: string;
+    bio: string;
+    imageUrl: string;
+    contact: string;
+}
+
+export interface AuthContextType {
+    isAdmin: boolean;
+    adminName: string | null;
+    passwords: Password[];
+    login: (password: string) => Promise<boolean>;
+    logout: () => void;
+    addPassword: (password: string) => Promise<boolean>;
+    deletePassword: (id: number) => Promise<boolean>;
 }
