@@ -10,10 +10,10 @@ const QRCodePage = () => {
     const [copyButtonText, setCopyButtonText] = useState('Copy Link');
 
     useEffect(() => {
-        // Construct a clean base URL, removing the hash and any potential file like 'index.html'.
-        const path = window.location.pathname.replace(/[^/]*\.[^/]*$/, '');
-        const baseUrl = `${window.location.origin}${path}`;
-        setUrl(baseUrl);
+        // This correctly gets the base URL of the application, removing any hash fragments.
+        // This ensures the QR code and shared link point to the homepage for wider accessibility.
+        const homepageUrl = window.location.href.split('#')[0];
+        setUrl(homepageUrl);
 
         // Check if the Web Share API is available
         if (navigator.share) {
