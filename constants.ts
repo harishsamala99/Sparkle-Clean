@@ -11,6 +11,6 @@ export const SERVICES_DATA: ServiceType[] = [
 ];
 
 export const HOUSE_CLEANER: Cleaner = {
-    name: "Tania Intriago", role: "Founder & Head Cleaner", bio: "With over years of expertise in transforming spaces, I founded SparkleClean out of a genuine passion for turning homes and workplaces into fresh, vibrant, and healthy environments. For me, it’s more than cleaning—it’s about creating a sparkle that inspires comfort, clarity, and joy.", imageUrl: "./picture/pic1.jpg", contact: "+14752080329",
+    name: "Tania Intriago", role: "Founder & Head Cleaner", bio: "With years of experience, I founded SparkleClean from a passion for making homes and workplaces fresh, vibrant, and healthy. To me, cleaning isn’t just a service—it’s about creating a sparkle that brings comfort, clarity, and joy.", imageUrl: "./picture/pic1.jpg", contact: "+14752080329",
 };
 

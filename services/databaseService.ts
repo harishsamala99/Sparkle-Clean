@@ -25,21 +25,21 @@ export interface PasswordCreate {
 
 // ==================== BOOKINGS ====================
 export const getAllBookings = async (): Promise<Booking[]> => {
-  const res = await fetch(`${API}/bookings`);
+  const res = await fetch(`${API}/api/bookings`);
   if (!res.ok) return [];
   const body = await res.json();
   return body.data as Booking[];
 };
 
 export const getBookingById = async (id: number): Promise<Booking | null> => {
-  const res = await fetch(`${API}/bookings/number/${id}`);
+  const res = await fetch(`${API}/api/bookings/number/${id}`);
   return res.ok ? res.json() : null;
 };
 
 export const getBookingByNumber = async (
   bookingNumber: string
 ): Promise<Booking | null> => {
-  const res = await fetch(`${API}/bookings/number/${bookingNumber}`);
+  const res = await fetch(`${API}/api/bookings/number/${bookingNumber}`);
   if (!res.ok) return null;
   const body = await res.json();
   return body.data as Booking;   // <- important
@@ -48,7 +48,7 @@ export const getBookingByNumber = async (
 export const createBooking = async (
   booking: Omit<Booking, "id" | "bookingNumber" | "status">
 ): Promise<Booking | null> => {
-  const res = await fetch(`${API}/bookings`, {   // ✅ matches backend now
+  const res = await fetch(`${API}/api/bookings`, {   // ✅ matches backend now
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(booking),
@@ -61,14 +61,14 @@ export const updateBookingStatus = async (
   id: number,
   status: "Pending" | "Approved" | "Rejected"
 ): Promise<boolean> => {
-  const res = await fetch(`${API}/bookings/${id}/status?status=${status}`, {
+  const res = await fetch(`${API}/api/bookings/${id}/status?status=${status}`, {
     method: "PUT",
   });
   return res.ok;
 };
 
 export const deleteBooking = async (id: number): Promise<boolean> => {
-  const res = await fetch(`${API}/bookings/${id}`, {
+  const res = await fetch(`${API}/api/bookings/${id}`, {
     method: "DELETE",
   });
   return res.ok;
