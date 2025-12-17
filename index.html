@@ -1,78 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
-    <title>SparkleClean - Pristine Cleaning Services</title>
 
-    <meta name="description" content="Reliable, professional, and thorough cleaning services tailored to your needs. Book your cleaning today!">
-    <!-- Use your actual production domain for the canonical and og:url tags -->
-    <link rel="canonical" href="https://sparkleclean.example.com" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sparkle Clean</title>
+  <link rel="icon" href="https://res.cloudinary.com/dfsebl7h3/image/upload/v1760256352/favicon_lkjjnu.png" type="image/png" />
+  <script>
+    tailwind.config = {
+      content: [
+        "./index.html",
+        ".//*.{html,js,ts,jsx,tsx}"
+      ]
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Simple scrollbar styling for a more modern look */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sparkleclean.example.com">
-    <meta property="og:title" content="SparkleClean - Pristine Cleaning Services">
-    <meta property="og:description" content="Reliable, professional, and thorough cleaning services tailored to your needs. Book your cleaning today!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1200">
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://sparkleclean.example.com">
-    <meta name="twitter:title" content="SparkleClean - Pristine Cleaning Services">
-    <meta name="twitter:description" content="Reliable, professional, and thorough cleaning services tailored to your needs. Book your cleaning today!">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1200">
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              teal: {
-                50: '#f0fdfa',
-                100: '#ccfbf1',
-                200: '#99f6e4',
-                300: '#5eead4',
-                400: '#2dd4bf',
-                500: '#14b8a6',
-                600: '#0d9488',
-                700: '#0f766e',
-                800: '#115e59',
-                900: '#134e4a',
-              },
-            }
-          }
-        }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Simple fade-in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
-    </script>
-    <style>
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      .animate-fadeIn {
-        animation: fadeIn 0.5s ease-out forwards;
-      }
-    </style>
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+  </style>
   <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.8.2"
+  {
+    "imports": {
+      "react": "https://unpkg.com/react@19.1.1?module",
+      "react-dom": "https://unpkg.com/react-dom@19.1.1?module",
+      "react-router-dom": "https://unpkg.com/react-router-dom@7.8.2?module",
+      "@google/genai": "https://unpkg.com/@google/genai@1.15.0?module"
+    }
   }
-}
-</script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/svg2pdf.js@2.2.3/dist/svg2pdf.umd.min.js"></script>
+  </script>
 </head>
-  <body class="bg-slate-50">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body class="bg-gray-100">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
